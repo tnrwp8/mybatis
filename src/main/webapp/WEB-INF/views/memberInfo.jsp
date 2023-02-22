@@ -14,6 +14,6 @@
 	이름 : ${memberDto.mname }<br><br>
 	이메일 : ${memberDto.memail }<br><br>
 	가입일 : ${memberDto.mdate }<br><br>
-	<a href="loginOk">로그인 확인화면으로 가기</a>
+	<a href="index">로그인 확인화면으로 가기</a>
 </body>
 </html>
