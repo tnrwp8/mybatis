@@ -6,6 +6,10 @@
    
 <mapper namespace="com.yjhcompany.home.dao.Mapper">
 	<insert id="joinDao">
-		INSERT INTO batis_member(mid, mpw, mname, meamil) VALUES (#{param1},#{param2},#{param3},#{param4})
+		INSERT INTO batis_member(mid, mpw, mname, memail) VALUES (#{param1},#{param2},#{param3},#{param4})
 	</insert>   		   
+	<select id="loginCheck" resultType="int">
+		SELECT COUNT(*) FROM batis_member WHERE mid=#{param1} AND mpw=#{param2}  
+	</select>
+	
 </mapper>
