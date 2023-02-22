@@ -23,6 +23,11 @@ public class HomeController {
 	
 		return "index";
 	}
+	@RequestMapping(value = "/index")
+	public String index2() {
+	
+		return "index";
+	}
 	
 	@RequestMapping(value = "/join")
 		public String join() {
@@ -90,5 +95,35 @@ public class HomeController {
 	      model.addAttribute("memberDto", memberDto);
 	      
 	      return "memberInfo";
+	   }
+	   @RequestMapping(value="/memberDelete")
+	   public String memberDelete(HttpServletRequest request,Model model) {
+		   
+	      HttpSession session = request.getSession();
+	      String sessionid =(String)session.getAttribute("sessionid");//현재 로그인한 회원의 아이디
+	      
+	      Mapper dao = sqlSession.getMapper(Mapper.class);
+	      dao.memberDelete(sessionid);//회원정보 삭제
+	   
+	      return "redirect:index";
+	   }
+	   @RequestMapping(value="/writeForm")
+	   public String writeForm(HttpServletRequest request,Model model) {
+		   
+	      HttpSession session = request.getSession();
+	      String sessionid =(String)session.getAttribute("sessionid");//현재 로그인한 회원의 아이디
+	      
+	      Mapper dao = sqlSession.getMapper(Mapper.class);
+	      
+	      if(sessionid == null) {//로그인 하지 않은 상태
+	    	  model.addAttribute("mid", "GUEST");
+	    	  model.addAttribute("mname", "비회원");
+	      }else {//로그인 한 상태
+	    	  MemberDto memberdto =dao.memberInfo(sessionid);
+	    	  model.addAttribute("mid", memberdto.getMid());
+	    	  model.addAttribute("mname", memberdto.getMname());
+	      }
+	
+	      return "writeForm";
 	   }
 }
