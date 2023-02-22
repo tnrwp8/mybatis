@@ -8,6 +8,7 @@ public class MemberDto {
 	private String mpw;//회원 비밀번호
 	private String mname;//회원 이름
 	private String memail;//회원 이메일
+	
 	private Timestamp mdate;//회원가입일
 	public MemberDto() {
 		super();
